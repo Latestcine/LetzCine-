@@ -94,12 +94,3 @@ footer {
   font-size: 0.85rem;
   color: #999;
 }
-
-footer {
-  text-align: center;
-  padding: 15px;
-  background-color: #111;  /* match your site's theme */
-  color: #ccc;
-  font-size: 14px;
-  margin-top: 40px;
-}
