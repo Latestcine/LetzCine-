@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LetzCine - HDMovie2 Style</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>LetzCine</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Bollywood</a>
+    <a href="#">South Indian</a>
+    <a href="#">Hollywood</a>
+    <a href="#">Web Series</a>
+  </nav>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search movies...">
+  </div>
+  <div class="container" id="movieList">
+    <div class="card">
+      <img src="images/the-royals.jpg" alt="The Royals">
+      <div class="card-content">
+        <h3>The Royals (2025)</h3>
+        <p>Hindi | Drama | Web Series</p>
+        <a href="https://gplinks.co/LATESTCiNERoyals" target="_blank">Download</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/cleaner.jpg" alt="Cleaner">
+      <div class="card-content">
+        <h3>Cleaner (2025)</h3>
+        <p>Hindi | Thriller | Movie</p>
+        <a href="https://gplinks.co/LATESCiNECleaner" target="_blank">Download</a>
+      </div>
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 LetzCine. All rights reserved.
+  </footer>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keyup', function () {
+      const filter = searchInput.value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = title.includes(filter) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
