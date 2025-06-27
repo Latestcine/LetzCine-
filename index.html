@@ -3,198 +3,215 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LetzCine - Watch Movies & Series</title>
+  <title>LetzCine — Movies & Web Series</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #121212;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-    }
-    header {
-      background: #1e1e1e;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      color: #ff3c3c;
-      font-size: 2.5rem;
-    }
-    nav {
-      background: #000;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 10px;
-    }
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #121212; color: #fff; font-family: 'Segoe UI', sans-serif; }
+
+    /* Header */
+    header { background: #1e1e1e; padding: 20px; text-align: center; }
+    header h1 { color: #ff3c3c; font-size: 2.5rem; }
+    header p { color: #ccc; margin-top: 5px; }
+
+    /* Navigation */
+    nav { background: #000; display: flex; justify-content: center; flex-wrap: wrap; padding: 10px; }
     nav a {
-      color: #fff;
-      margin: 10px 15px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
+      color: #fff; margin: 8px 15px; text-decoration: none; font-weight: bold;
+      transition: color .3s;
     }
-    nav a:hover {
-      color: #ff3c3c;
-    }
-    .search-box {
-      text-align: center;
-      padding: 20px;
-    }
+    nav a:hover { color: #ff3c3c; }
+
+    /* Search */
+    .search-box { text-align: center; padding: 20px; background: #1a1a1a; }
     .search-box input {
-      width: 60%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background: #1e1e1e;
-      color: white;
-      font-size: 1rem;
+      width: 60%; max-width: 400px; padding: 10px; border: none; border-radius: 5px;
+      background: #2a2a2a; color: #fff; font-size: 1rem;
     }
-    .container {
+
+    /* Sections */
+    section { padding: 30px 20px; }
+    section h2 { font-size: 1.6rem; margin-bottom: 15px; color: #ff3c3c; }
+
+    /* Movie Grid */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
       gap: 20px;
-      padding: 20px;
     }
     .card {
-      background: #1e1e1e;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
+      background: #1e1e1e; border-radius: 8px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5); transition: transform .3s;
     }
-    .card:hover {
-      transform: scale(1.05);
-    }
+    .card:hover { transform: scale(1.03); }
     .card img {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
+      width: 100%; height: 270px; object-fit: cover;
     }
     .card-content {
       padding: 10px;
     }
     .card-content h3 {
-      color: #ff3c3c;
-      font-size: 1rem;
-      margin-bottom: 5px;
+      color: #ff3c3c; font-size: 1rem; margin-bottom: 5px;
     }
     .card-content p {
-      font-size: 0.85rem;
-      color: #ccc;
+      font-size: .85rem; color: #ccc; line-height: 1.2;
     }
     .card-content a {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 6px 10px;
-      background: #ff3c3c;
-      color: #fff;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 0.85rem;
+      display: inline-block; margin-top: 8px; padding: 6px 10px;
+      background: #ff3c3c; color: #fff; border-radius: 4px; text-decoration: none;
+      font-size: .85rem;
     }
+
+    /* Footer */
     footer {
-      text-align: center;
-      padding: 20px;
-      background: #000;
-      font-size: 0.85rem;
-      color: #999;
+      text-align: center; padding: 15px; background: #000; color: #777;
+      font-size: .85rem; margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
 
-  
-  <div class="container" id="movieList">
-    <!-- Example Card -->
-    <div class="card">
-      
-    <img src="images/the-royals.jpg" alt="The Royals">
-      <div class="card-content">
-        <h3>The Royals (2025)</h3>
-        <p>Hindi | Drama | Web Series</p>
-        <a href="https://gplinks.co/LATESTCiNERoyals" target="_blank">Download</a>
-      </div>
-    </div>
+  <header>
+    <h1>LetzCine</h1>
+    <p>Your Movies & Web Series Hub</p>
+  </header>
 
-    <div class="card">
-      <img src="images/cleaner.jpg" alt="Cleaner">
-      <div class="card-content">
-        <h3>Cleaner (2025)</h3>
-        <p>Hindi | Thriller | Movie</p>
-        <a href="https://gplinks.co/LATESCiNECleaner" target="_blank">Download</a>
-      </div>
-    </div>
+  <nav>
+    <a href="#latest">Latest</a>
+    <a href="#bollywood">Bollywood</a>
+    <a href="#south">South Movies</a>
+    <a href="#webseries">Web Series</a>
+    <a href="#events">Live Events</a>
+  </nav>
 
-    <div class="card">
-      <img src="images/puppy.jpg" alt="Puppy">
-      <div class="card-content">
-        <h3>Puppy (2025)</h3>
-        <p>Kannada | Family / Drama</p>
-        <a href="https://gplinks.co/LATESTCiNEPuppy" target="_blank">Download</a>
-      </div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by title...">
+  </div>
+
+  <!-- LATEST SECTION -->
+  <section id="latest">
+    <h2>Latest Releases</h2>
+    <div class="grid" id="latestGrid">
+      <!-- Paste your newest movie cards here -->
     </div>
-    
-    <div class="card">
-      <img src="images/baby-and-baby.jpg" alt="Baby & Baby">
-      <div class="card-content">
-        <h3>Baby & Baby (2025)</h3>
-        <p>Hindi | Romance / Comedy</p>
-        <a href="https://gplinks.co/F0MAzmO" target="_blank">Download</a>
+  </section>
+
+  <!-- BOLLYWOOD SECTION -->
+  <section id="bollywood">
+    <h2>Bollywood</h2>
+    <div class="grid" id="bollywoodGrid">
+
+      <!-- Cleaner -->
+      <div class="card">
+        <img src="images/cleaner.jpg" alt="Cleaner">
+        <div class="card-content">
+          <h3>Cleaner (2025)</h3>
+          <p>Hindi | Thriller | Movie</p>
+          <a href="https://gplinks.co/LATESCiNECleaner" target="_blank">Download</a>
+        </div>
       </div>
+
+      <!-- Baby & Baby -->
+      <div class="card">
+        <img src="images/baby-and-baby.jpg" alt="Baby & Baby">
+        <div class="card-content">
+          <h3>Baby & Baby (2025)</h3>
+          <p>Hindi | Romance / Comedy</p>
+          <a href="https://gplinks.co/F0MAzmO" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <!-- Kuberaa -->
+      <div class="card">
+        <img src="images/kuberaa.jpg" alt="Kuberaa">
+        <div class="card-content">
+          <h3>Kuberaa (2025)</h3>
+          <p>Hindi | Action / Drama</p>
+          <a href="https://gplinks.co/eLIx1wXc" target="_blank">Download</a>
+        </div>
+      </div>
+
     </div>
-  
-    <div class="card" data-category="south">
-  <img src="images/default.jpg" alt="Tourist Family">
-  <div class="card-content">
-    <h3>Tourist Family (2025)</h3>
-    <p>Hindi, Malayalam, Telugu &amp; Kannada | Adventure / Family</p>
-    <a href="https://gplinks.co/d5IH" target="_blank">Download</a>
-  </div>
-</div>
-    
-<div class="card" data-category="bollywood">
-  <img src="images/default.jpg" alt="Kuberaa">
-  <div class="card-content">
-    <h3>Kuberaa (2025)</h3>
-    <p>Hindi | Action / Drama</p>
-    <a href="https://gplinks.co/eLIx1wXc" target="_blank">Download</a>
-  </div>
-</div>
-    
-    <div class="card" data-category="webseries">
-  <img src="images/f1.jpg" alt="F1">
-  <div class="card-content">
-    <h3>F1 (2025)</h3>
-    <p>English | Action / Sports</p>
-    <a href="https://gplinks.co/ouj3i" target="_blank">Download</a>
-  </div>
-  </div>
-    
+  </section>
+
+  <!-- SOUTH SECTION -->
+  <section id="south">
+    <h2>South Movies</h2>
+    <div class="grid" id="southGrid">
+
+      <!-- Puppy -->
+      <div class="card">
+        <img src="images/puppy.jpg" alt="Puppy">
+        <div class="card-content">
+          <h3>Puppy (2025)</h3>
+          <p>Kannada | Family / Drama</p>
+          <a href="https://gplinks.co/LATESTCiNEPuppy" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <!-- Tourist Family -->
+      <div class="card">
+        <img src="images/tourist-family.jpg" alt="Tourist Family">
+        <div class="card-content">
+          <h3>Tourist Family (2025)</h3>
+          <p>Hindi, Malayalam, Telugu &amp; Kannada | Adventure / Family</p>
+          <a href="https://gplinks.co/d5IH" target="_blank">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WEB SERIES SECTION -->
+  <section id="webseries">
+    <h2>Web Series</h2>
+    <div class="grid" id="webseriesGrid">
+
+      <!-- The Royals -->
+      <div class="card">
+        <img src="images/the-royals.jpg" alt="The Royals">
+        <div class="card-content">
+          <h3>The Royals (2025)</h3>
+          <p>Hindi | Drama | Web Series</p>
+          <a href="https://gplinks.co/LATESTCiNERoyals" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <!-- F1 -->
+      <div class="card">
+        <img src="images/f1.jpg" alt="F1">
+        <div class="card-content">
+          <h3>F1 (2025)</h3>
+          <p>English | Action / Sports</p>
+          <a href="https://gplinks.co/ouj3i" target="_blank">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIVE EVENTS (placeholder) -->
+  <section id="events">
+    <h2>Live Events</h2>
+    <div class="grid" id="eventsGrid">
+      <!-- Add event cards here -->
+    </div>
+  </section>
+
   <footer>
     &copy; 2025 LetzCine. All rights reserved.
   </footer>
-    
+
   <script>
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('keyup', function () {
-      const filter = searchInput.value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
+    // Search across all sections
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
         const title = card.querySelector('h3').textContent.toLowerCase();
-        card.style.display = title.includes(filter) ? '' : 'none';
+        card.style.display = title.includes(term) ? '' : 'none';
       });
     });
   </script>
+
 </body>
 </html>
-
-<script>
-  function filterMovies(category) {
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-      if (category === 'all' || card.dataset.category === category) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-</script>
