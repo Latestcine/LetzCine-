@@ -1,95 +1,152 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LetzCine — Movies & Web Series</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LetzCine - Movies, Series & Events</title>
   <style>
-    .card {
-      display: inline-block;
-      width: 250px;
-      margin: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #111;
+      padding: 20px;
       text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
-    h1 {
-      cursor: pointer;
-      color: #444;
-      text-decoration: underline;
+    h2 {
+      margin-left: 20px;
+      margin-top: 40px;
+      border-left: 5px solid #e50914;
+      padding-left: 10px;
     }
-    .hidden {
-      display: none;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    .card-content a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #e50914;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 60px;
     }
   </style>
 </head>
 <body>
-
-  <h1 onclick="filterCategory('bollywood')">Bollywood</h1>
-  <div class="card bollywood">
-    <img src="Images/cleaner.jpg" alt="Cleaner" />
-    <h2>Cleaner</h2>
-    <p><strong>Cleaner (2025)</strong><br>Hindi | Thriller</p>
-    <button>Download</button>
-  </div>
-  <div class="card bollywood">
-    <img src="Images/baby_baby.jpg" alt="Baby & Baby" />
-    <h2>Baby & Baby</h2>
-    <p><strong>Baby & Baby (2025)</strong><br>Hindi | Romance / Comedy</p>
-    <button>Download</button>
-  </div>
-  <div class="card bollywood">
-    <img src="Images/kuberaa.jpg" alt="Kuberaa" />
-    <h2>Kuberaa</h2>
-    <p><strong>Kuberaa (2025)</strong><br>Hindi | Action / Drama</p>
-    <button>Download</button>
-  </div>
-
-  <h1 onclick="filterCategory('south')">South Movies</h1>
-  <div class="card south">
-    <img src="Images/puppy.jpg" alt="Puppy" />
-    <h2>Puppy</h2>
-    <p><strong>Puppy (2025)</strong><br>Kannada | Family / Drama</p>
-    <button>Download</button>
-  </div>
-  <div class="card south">
-    <img src="Images/tourist_family.jpg" alt="Tourist Family" />
-    <h2>Tourist Family</h2>
-    <p><strong>Tourist Family (2025)</strong><br>Adventure / Family</p>
-    <button>Download</button>
-  </div>
-  <div class="card south">
-    <img src="Images/saaree.jpg" alt="Saaree" />
-    <h2>Saaree</h2>
-    <p><strong>Saaree (2025)</strong><br>Drama / Romance</p>
-    <button>Download</button>
-  </div>
-
-  <h1 onclick="filterCategory('web')">Web Series</h1>
-  <div class="card web">
-    <img src="Images/the_royals.jpg" alt="The Royals" />
-    <h2>The Royals</h2>
-    <p><strong>The Royals (2025)</strong><br>Netflix | Romance / Drama</p>
-    <button>Download</button>
-  </div>
-  <div class="card web">
-    <img src="Images/f1.jpg" alt="F1" />
-    <h2>F1</h2>
-    <p><strong>F1 (2025)</strong><br>Theaters | Action / Sports</p>
-    <button>Download</button>
-  </div>
-
-  <script>
-    function filterCategory(category) {
-      const allCards = document.querySelectorAll('.card');
-      allCards.forEach(card => {
-        card.classList.toggle('hidden', !card.classList.contains(category));
-      });
-    }
-  </script>
-
+  <header>
+    LetzCine
+  </header>  <h2>Web Series</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/the-royals.jpg" alt="The Royals">
+      <div class="card-content">
+        <h3>The Royals (2025)</h3>
+        <p>Hindi | Drama | Web Series</p>
+        <a href="https://gplinks.co/LATESTCiNERoyals" target="_blank">Download</a>
+      </div>
+    </div>
+  </div>  <h2>Bollywood</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/cleaner.jpg" alt="Cleaner">
+      <div class="card-content">
+        <h3>Cleaner (2025)</h3>
+        <p>Hindi | Thriller</p>
+        <a href="https://gplinks.co/LATESCiNECleaner" target="_blank">Download</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/baby-and-baby.jpg" alt="Baby & Baby">
+      <div class="card-content">
+        <h3>Baby & Baby (2025)</h3>
+        <p>Hindi | Romance / Comedy</p>
+        <a href="https://gplinks.co/F0MAzmO" target="_blank">Download</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/kuberaa.jpg" alt="Kuberaa">
+      <div class="card-content">
+        <h3>Kuberaa (2025)</h3>
+        <p>Hindi | Action / Drama</p>
+        <a href="https://gplinks.co/eLIx1wXc" target="_blank">Download</a>
+      </div>
+    </div>
+  </div>  <h2>South</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/puppy.jpg" alt="Puppy">
+      <div class="card-content">
+        <h3>Puppy (2025)</h3>
+        <p>Kannada | Family / Drama</p>
+        <a href="https://gplinks.co/LATESTCiNEPuppy" target="_blank">Download</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/saaree.jpg" alt="Saaree">
+      <div class="card-content">
+        <h3>Saaree (2025)</h3>
+        <p>Hindi & Telugu | Romance / Drama</p>
+        <a href="https://gplinks.co/SaareeLATESTCiNE" target="_blank">Download</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/tourist-family.jpg" alt="Tourist Family">
+      <div class="card-content">
+        <h3>Tourist Family (2025)</h3>
+        <p>Hindi, Malayalam, Telugu & Kannada | Adventure</p>
+        <a href="https://gplinks.co/d5IH" target="_blank">Download</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/f1.jpg" alt="F1">
+      <div class="card-content">
+        <h3>F1 (2025)</h3>
+        <p>English | Sports / Action</p>
+        <a href="https://gplinks.co/ouj3i" target="_blank">Download</a>
+      </div>
+    </div>
+  </div>  <footer>
+    &copy; 2025 LetzCine. All rights reserved.
+  </footer>
 </body>
 </html>
