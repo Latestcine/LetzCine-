@@ -1,92 +1,112 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LetzCine – Movies & Web Series</title>
-    <style>
-        body { background: #121212; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header, footer { background: #1e1e1e; text-align: center; padding: 20px; }
-        h1, h2 { color: #ff3c3c; }
-        .grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
-        .card { background: #1c1c1c; border-radius: 10px; width: 270px; overflow: hidden; box-shadow: 0 0 10px #000; }
-        .card img { width: 100%; height: auto; }
-        .card-content { padding: 15px; }
-        .card h3 { margin: 0; color: #ff3c3c; }
-        .card p { margin: 10px 0; color: #ccc; }
-        .card a { display: inline-block; padding: 10px 15px; background: #ff3c3c; color: #fff; text-decoration: none; border-radius: 5px; }
-        .card a:hover { background: #e60000; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Video News — Mobile Preview</title>
+  <style>
+    :root{
+      --bg:#0b0e11; --card:#0f1720; --muted:#9aa4af; --accent:#0ea5a4;
+      --white:#f8fafc;
+    }
+    html,body{height:100%; margin:0; background:var(--bg); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+    .screen{max-width:420px; margin:20px auto; border-radius:18px; overflow:hidden; background:linear-gradient(180deg,#071019 0%, #0a1318 100%); box-shadow:0 20px 40px rgba(2,6,23,.6);}
+    .video-wrap{position:relative; background:#000; height:68vh; min-height:420px; display:flex; align-items:center; justify-content:center;}
+    .video-wrap iframe, .video-wrap video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0;}
+    .overlay-play{position:absolute; left:16px; top:16px; background:rgba(0,0,0,.45); color:var(--white); padding:6px 10px; border-radius:999px; font-size:13px}
+    .content{padding:16px; color:var(--white); background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.15) 100%);}
+    h1{margin:0; font-size:20px; line-height:1.2; letter-spacing:-0.2px;}
+    p.summary{margin:8px 0 12px; color:var(--muted); font-size:14px; line-height:1.45; max-height:4.5em; overflow:hidden;}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;}
+    .tag{background:rgba(255,255,255,.04); padding:6px 10px; border-radius:999px; color:var(--muted); font-size:13px; border:1px solid rgba(255,255,255,.03);}
+    .controls{display:flex; gap:10px; align-items:center; justify-content:space-between;}
+    .btn{background:var(--card); border:0; color:var(--white); padding:10px 12px; border-radius:10px; font-weight:600;}
+    .small{background:transparent; color:var(--muted); font-size:13px; padding:8px;}
+    footer.hint{font-size:12px; color:var(--muted); text-align:center; padding:12px;}
+    @media (max-width:420px){ .screen{margin:8px; border-radius:14px;} h1{font-size:18px;} .video-wrap{min-height:380px;} }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>LetzCine</h1>
-        <p>Latest Movies, Web Series & Live Events</p>
-    </header>
-
-    <h2 style="text-align:center;">Latest Uploads</h2>
-    <div class="grid">
-        <div class="card">
-            <img src="images/theroyals.jpg" alt="The Royals">
-            <div class="card-content">
-                <h3>The Royals (2025)</h3>
-                <p>Hindi | Drama | Web Series</p>
-                <a href="https://gplinks.co/LATESTCiNERoyals" target="_blank">Download</a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/cleaner.jpg" alt="Cleaner">
-            <div class="card-content">
-                <h3>Cleaner (2025)</h3>
-                <p>Hindi | Thriller | Movie</p>
-                <a href="https://gplinks.co/LATESCiNECleaner" target="_blank">Download</a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/puppy.jpg" alt="Puppy">
-            <div class="card-content">
-                <h3>Puppy (2025)</h3>
-                <p>Kannada | Family | Drama</p>
-                <a href="https://gplinks.co/LATESTCiNEPuppy" target="_blank">Download</a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/babybaby.jpg" alt="Baby & Baby">
-            <div class="card-content">
-                <h3>Baby & Baby (2025)</h3>
-                <p>Hindi | Romance | Drama</p>
-                <a href="https://gplinks.co/F0MAzmO" target="_blank">Download</a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/tourist.jpg" alt="Tourist Family">
-            <div class="card-content">
-                <h3>Tourist Family (2025)</h3>
-                <p>Multi Lang | Adventure | Family</p>
-                <a href="https://gplinks.co/d5IH" target="_blank">Download</a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/kuberaa.jpg" alt="Kuberaa">
-            <div class="card-content">
-                <h3>Kuberaa (2025)</h3>
-                <p>Hindi | Action | Thriller</p>
-                <a href="https://gplinks.co/eLIx1wXc" target="_blank">Download</a>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/f1.jpg" alt="F1">
-            <div class="card-content">
-                <h3>F1 (2025)</h3>
-                <p>English | Action | Sports</p>
-                <a href="https://gplinks.co/ouj3i" target="_blank">Download</a>
-            </div>
-        </div>
+  <div class="screen" role="region" aria-label="Video news preview">
+    <div class="video-wrap">
+      <!-- Replace src with your YouTube embed or hosted mp4 -->
+      <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4?rel=0&controls=0&autoplay=0&mute=1"
+              title="Sample video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+      <div class="overlay-play">LIVE • 00:57</div>
     </div>
 
-    <footer>
-        <p>© 2025 LetzCine. All rights reserved.</p>
-    </footer>
+    <div class="content">
+      <h1 id="headline">India Conducts Major Naval Drill in Indo-Pacific</h1>
+      <p class="summary" id="summary">
+        The Indian Navy launched a large-scale exercise involving 40+ ships and allied forces in the Indo-Pacific region.
+        Quick overview of objectives, participating nations, and strategic importance — 60 seconds.
+      </p>
+
+      <div class="tags" aria-hidden="true">
+        <div class="tag">Geopolitics</div>
+        <div class="tag">Defence</div>
+        <div class="tag">Trending</div>
+      </div>
+
+      <div class="controls">
+        <button class="small" onclick="prev()">◀ Prev</button>
+        <div style="flex:1"></div>
+        <button class="btn" onclick="save()">Watch Later</button>
+        <button class="small" onclick="share()">Share</button>
+      </div>
+
+      <div style="height:10px"></div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="small" onclick="openSheet()">Edit (Google Sheet)</button>
+        <div style="flex:1"></div>
+        <span style="color:var(--muted); font-size:13px">Updated: <strong id="date">Today</strong></span>
+      </div>
+
+      <footer class="hint">Tap video to pause/play • Text is short for quick reading</footer>
+    </div>
+  </div>
+
+  <script>
+    // Demo: simulate prev/next and simple actions (no backend).
+    const items = [
+      {
+        video: "https://www.youtube.com/embed/ScMzIvxBSi4?rel=0&controls=0&mute=1",
+        title: "India Conducts Major Naval Drill in Indo-Pacific",
+        summary: "The Indian Navy launched a large-scale exercise involving 40+ ships and allied forces in the Indo-Pacific region. Quick overview in 60 seconds.",
+        tags: ["Geopolitics","Defence"]
+      },
+      {
+        video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&controls=0&mute=1",
+        title: "Global Headline Roundup — Top Stories",
+        summary: "A 45-second roundup of the top international headlines you need to know today.",
+        tags: ["Trending","Politics"]
+      }
+    ];
+    let idx=0;
+    function render(i){
+      const it = items[i];
+      document.querySelector('.video-wrap iframe').src = it.video;
+      document.getElementById('headline').textContent = it.title;
+      document.getElementById('summary').textContent = it.summary;
+      document.getElementById('date').textContent = new Date().toLocaleDateString();
+      // update tags UI (simple)
+      const tagWrap = document.querySelector('.tags');
+      tagWrap.innerHTML = it.tags.map(t => `<div class="tag">${t}</div>`).join('');
+    }
+    function prev(){ idx = (idx - 1 + items.length) % items.length; render(idx); }
+    function next(){ idx = (idx + 1) % items.length; render(idx); }
+    function save(){ alert('Saved to Watch Later (demo)'); }
+    function share(){ alert('Share dialog (demo)'); }
+    function openSheet(){ alert('Open your Google Sheet on mobile to edit entries (demo).'); }
+    // tap video to pause/play
+    document.querySelector('.video-wrap').addEventListener('click', () => {
+      const iframe = document.querySelector('.video-wrap iframe');
+      // toggling play/pause for iframe isn't trivial — just show a hint for preview
+      alert('In live site the tap would pause/play. This is a static preview.');
+    });
+    // initial
+    render(0);
+  </script>
 </body>
 </html>
