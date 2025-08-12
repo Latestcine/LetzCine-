@@ -3,297 +3,265 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>LetzCine Frontline — Daily Video Brief</title>
-<meta name="description" content="LetzCine Frontline — mobile video-first geopolitics & defence news. Short video briefs with short articles." />
+<title>LetzCine Frontline — Daily Video Brief (Free)</title>
+<meta name="description" content="Video-first daily briefs for geopolitics, defence and politics. Short 5-7 line summaries. Free, mobile-first."/>
 <style>
-  :root{
-    --bg:#0b0b0c; --card:#0f1112; --muted:#9aa4af; --accent:#e50914; --white:#f6f7f8;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%; margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--white);}
-  .container{max-width:480px;margin:0 auto;padding-bottom:40px;}
-  header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.2));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
-  .topbar{display:flex;align-items:center;gap:12px;padding:12px 14px;justify-content:center}
+  :root{--bg:#0b0b0c;--card:#0f1112;--muted:#9aa4af;--accent:#e50914;--white:#f6f7f8}
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--white)}
+  .wrap{max-width:480px;margin:0 auto;padding:12px}
+  header{display:flex;align-items:center;justify-content:center;padding:10px 0;position:sticky;top:0;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent);backdrop-filter: blur(4px);z-index:10}
   .logo{display:flex;align-items:center;gap:10px}
-  .logo .mark{width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,#e50914,#ff2d2d);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
-  .logo .text{font-weight:700;letter-spacing:0.2px}
-  main{padding:12px}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; overflow:hidden;margin-bottom:16px;border:1px solid rgba(255,255,255,0.03)}
-  .video-area{position:relative;background:#000;height:64vh;min-height:320px;display:flex;align-items:center;justify-content:center}
-  .video-area iframe, .video-area video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
-  .video-meta{padding:12px}
-  h2{margin:0 0 8px 0;font-size:18px;line-height:1.18}
+  .mark{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#e50914,#ff2d2d);display:flex;align-items:center;justify-content:center;font-weight:800}
+  .brand{font-weight:800}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+  .media{position:relative;background:#000;height:56vw;min-height:220px;display:flex;align-items:center;justify-content:center}
+  .media iframe,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+  .meta{padding:12px}
+  h2{margin:0 0 8px 0;font-size:18px}
   p.summary{margin:0 0 10px 0;color:var(--muted);font-size:14px;max-height:9em;overflow:hidden}
   .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-  .tag{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
-  .actions{display:flex;gap:8px;align-items:center}
-  .btn{background:var(--accent);color:white;border:0;padding:9px 12px;border-radius:10px;font-weight:600;box-shadow:0 6px 18px rgba(229,9,20,0.12)}
-  .link-btn{background:transparent;color:var(--muted);border:0;padding:8px;font-size:14px}
-  .end-note{text-align:center;color:var(--muted);padding:18px;font-size:14px}
-  .home-btn{position:fixed;right:12px;bottom:14px;background:var(--accent);border-radius:999px;padding:12px;color:white;border:0;box-shadow:0 10px 30px rgba(229,9,20,0.14)}
-  /* Modal */
-  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
-  .modal{max-width:760px;width:100%;max-height:92vh;overflow:auto;background:linear-gradient(180deg,#0c0c0c,#0b0b0b);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.04)}
-  .modal .title{font-size:20px;margin:6px 0 12px 0}
-  .modal .full-article{color:var(--muted);line-height:1.6;font-size:15px;margin-bottom:12px;white-space:pre-wrap}
-  .modal .close{background:transparent;border:0;color:var(--muted);font-weight:700;float:right}
-  /* responsive */
-  @media(min-width:560px){ .container{margin-top:20px} .video-area{height:58vh} }
+  .tag{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+  .actions{display:flex;gap:10px}
+  .btn{background:var(--accent);border:0;color:#fff;padding:9px 12px;border-radius:10px;font-weight:700}
+  .link{background:transparent;border:0;color:var(--muted);padding:8px}
+  .end{color:var(--muted);text-align:center;padding:14px}
+  .home{position:fixed;right:14px;bottom:14px;background:var(--accent);border-radius:999px;padding:12px;border:0;color:#fff;display:none}
+  /* modal */
+  .modalbg{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;padding:12px;z-index:60}
+  .modal{max-width:720px;width:100%;max-height:92vh;overflow:auto;background:#0f1112;border-radius:10px;padding:14px;border:1px solid rgba(255,255,255,0.03)}
+  .modal iframe{width:100%;height:260px;border:0}
+  .modal h3{margin:10px 0}
+  .modal p{color:var(--muted);line-height:1.6;white-space:pre-wrap}
+  .small{font-size:13px;color:var(--muted)}
+  .controls{display:flex;gap:8px;align-items:center}
+  input[type="text"], textarea{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:#0b0b0b;color:var(--white);margin-top:6px}
+  button.kv{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)}
 </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="topbar">
-        <div class="logo" aria-hidden="false">
-          <div class="mark">LC</div>
-          <div class="text">LetzCine <span style="color:var(--accent)">Frontline</span></div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <div class="wrap">
+    <header><div class="logo"><div class="mark">LC</div><div class="brand">LetzCine <span style="color:var(--accent)">Frontline</span></div></div></header>
 
-  <main class="container" id="main">
-    <!-- Cards will be injected here -->
-    <div id="cards"></div>
+    <main id="content" aria-live="polite">
+      <div id="loading" class="small" style="text-align:center;padding:16px;color:var(--muted)">Loading today’s headlines…</div>
+    </main>
 
-    <!-- End note (when list ends) -->
-    <div id="endNote" class="end-note" style="display:none">
-      — End of Today's Headlines —<br/>
-      Want more? Visit full coverage pages below.
-    </div>
-  </main>
+    <div id="endNote" class="end" style="display:none">— End of Today's Headlines —<br/>Tap a headline for full article or add video.</div>
+  </div>
 
-  <!-- Floating Home (visible when modal open) -->
-  <button id="homeBtn" class="home-btn" title="Home" style="display:none">Home</button>
-
-  <!-- Modal for full article -->
-  <div id="modalBack" class="modal-back" role="dialog" aria-modal="true">
+  <!-- Modal to view full article (opens original link) -->
+  <div id="modalBg" class="modalbg" aria-hidden="true">
     <div class="modal" id="modal">
-      <button class="close" id="closeModal">✕</button>
-      <div id="modalVideo" style="margin-top:6px;margin-bottom:12px"></div>
-      <div class="title" id="modalTitle"></div>
-      <div class="full-article" id="modalArticle"></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <div class="tag" id="modalTags"></div>
+      <button id="closeModal" style="float:right;background:transparent;border:0;color:#999;font-weight:700">✕</button>
+      <div id="modalVideo"></div>
+      <h3 id="modalTitle"></h3>
+      <p id="modalFull" style="color:var(--muted)"></p>
+      <div style="margin-top:10px">
+        <a id="modalSource" href="#" target="_blank" class="small">Open original source</a>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal to add YouTube embed for an item (stored locally) -->
+  <div id="videoAddBg" class="modalbg" aria-hidden="true">
+    <div class="modal">
+      <button id="closeAdd" style="float:right;background:transparent;border:0;color:#999;font-weight:700">✕</button>
+      <h3>Add video embed for this headline</h3>
+      <p class="small">Paste a YouTube embed URL (example: https://www.youtube.com/embed/VIDEO_ID) to show the video inline for this item. Saves locally on this device.</p>
+      <label>Embed URL</label>
+      <input id="embedUrl" type="text" placeholder="https://www.youtube.com/embed/VIDEO_ID" />
+      <div style="height:10px"></div>
+      <div style="display:flex;gap:8px">
+        <button id="saveEmbed" class="btn">Save</button>
+        <button id="openSearch" class="kv">Find on YouTube</button>
+      </div>
+      <div id="embedNotice" class="small" style="margin-top:8px;color:var(--muted)"></div>
     </div>
   </div>
 
 <script>
 /*
-HOW TO USE (quick):
-1) Create a Google Sheet with columns (first row headers):
-   VideoLink | Headline | Summary | Tags | FullArticle
-   - VideoLink: use YouTube embed format https://www.youtube.com/embed/VIDEO_ID or direct mp4 url
-   - Summary: short 5-7 lines (mobile-friendly)
-   - Tags: comma-separated like Geopolitics,Defence
-   - FullArticle: longer text for the detailed page
+Free client-only news reader:
+- Uses free RSS feeds via allorigins proxy
+- Filters items by keywords (geopolitics, india, defence, army, navy, politics, election, china, russia, ukraine)
+- Shows trimmed 5-7 line summaries
+- "Find Video" opens YouTube search; "Add Video" lets you paste embed URL and stores it in localStorage.
 
-2) Publish sheet to web:
-   File -> Publish to web -> choose the sheet -> Publish
-   Then use the "gviz" JSON endpoint URL:
-     https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/gviz/tq?tqx=out:json
-   Replace YOUR_SHEET_ID in the code below.
-
-3) If you DON'T want to expose the sheet publicly, use:
-   - Option A: Create a small Google Apps Script webapp (doGet) that returns JSON and deploy as "Anyone, even anonymous" (still public) OR
-   - Option B (recommended for privacy): host the JSON on your server or use a simple serverless function (Netlify/Vercel) as a proxy that fetches the sheet behind the scenes.
-
-For now this page uses client-side fetch with gviz JSON OR a local demo dataset (so it works out of box).
+How to use:
+- Save as index.html and open in mobile browser.
+- To change feeds, edit FEEDS array below.
 */
 
-// ====== CONFIG ======
-const SHEET_GVIZ_URL = ""; // <-- paste your gviz url here if you have published your sheet
-const MAX_TODAY_ITEMS = 6;   // number of items to show on homepage (no endless scroll)
-// =====================
-
-// Demo fallback dataset (works immediately)
-// Replace by your Google Sheet to go live.
-const DEMO_DATA = [
-  {
-    VideoLink: "https://www.youtube.com/embed/ScMzIvxBSi4?rel=0&controls=0&mute=1",
-    Headline: "India Conducts Major Naval Drill in Indo-Pacific",
-    Summary: "The Indian Navy launched its largest exercise in the Indo-Pacific with over 40 warships and allied units. Quick 60-second brief focusing on objectives and participating nations.",
-    Tags: "Geopolitics,Defence",
-    FullArticle: "Full article: The Indian Navy has increased presence with coordinated exercises across multiple fleets, focusing on maritime security, interoperability and readiness. The exercise involved carrier groups, submarines, and logistic support. Strategic implications include an increased deterrence posture and improved regional coordination."
-  },
-  {
-    VideoLink: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&controls=0&mute=1",
-    Headline: "Global Headline Roundup — Top Stories",
-    Summary: "A concise 45-second roundup of the top international stories including diplomatic talks, trade updates and a quick geopolitics snapshot.",
-    Tags: "Trending,Politics",
-    FullArticle: "Full article: Today's roundup covers the latest in diplomatic negotiations, economic measures affecting global trade, and a summary of breaking developments. Analysis covers potential outcomes and near-term impact."
-  }
+const FEEDS = [
+  {name:"BBC World", url:"http://feeds.bbci.co.uk/news/world/rss.xml"},
+  {name:"Reuters World", url:"http://feeds.reuters.com/Reuters/worldNews"},
+  {name:"Al Jazeera", url:"https://www.aljazeera.com/xml/rss/all.xml"}
 ];
 
-// Utilities
-function el(tag, cls){const e=document.createElement(tag); if(cls) e.className=cls; return e;}
-function parseGvizJson(text){
-  // gviz returns: /*O_o*/\ngoogle.visualization.Query.setResponse({...})
-  const json = text.replace(/^[^{]*/, '').replace(/;?$/, '');
-  try{
-    return JSON.parse(json);
-  }catch(err){
-    console.warn('GViz parse failed', err);
-    return null;
-  }
+const KEYWORDS = ["geopolitic","geopolitics","defence","defense","army","navy","airforce","india","indian","politic","election","china","russia","ukraine","conflict","war","security"];
+const MAX_ITEMS = 6; // today's limit
+
+const proxy = url => "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+
+function el(tag, cls){ const e = document.createElement(tag); if(cls) e.className = cls; return e; }
+function trimText(text, maxChars=420){
+  if(!text) return "";
+  // remove html tags
+  text = text.replace(/<[^>]*>/g, '').replace(/\s+/g,' ').trim();
+  if(text.length <= maxChars) return text;
+  // cut to last sentence or word
+  let cut = text.slice(0, maxChars);
+  const last = Math.max(cut.lastIndexOf('.'), cut.lastIndexOf('!'), cut.lastIndexOf('?'), cut.lastIndexOf(','));
+  if(last > Math.floor(maxChars*0.5)) cut = cut.slice(0, last+1);
+  return cut + '...';
 }
 
-async function fetchSheetData(){
-  if(!SHEET_GVIZ_URL) return DEMO_DATA;
+async function fetchFeed(feed){
   try{
-    const res = await fetch(SHEET_GVIZ_URL);
-    const txt = await res.text();
-    const parsed = parseGvizJson(txt);
-    if(!parsed) return DEMO_DATA;
-    const cols = parsed.table.cols.map(c => c.label || c.id);
-    const rows = parsed.table.rows.map(r => {
-      const obj = {};
-      r.c.forEach((cell,i)=>{
-        obj[cols[i]] = cell ? cell.v : "";
-      });
-      return obj;
+    const r = await fetch(proxy(feed.url));
+    if(!r.ok) throw new Error('bad');
+    const txt = await r.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(txt, "text/xml");
+    const items = Array.from(xml.querySelectorAll('item')).map(it => {
+      return {
+        title: (it.querySelector('title') && it.querySelector('title').textContent) || '',
+        description: (it.querySelector('description') && it.querySelector('description').textContent) || '',
+        link: (it.querySelector('link') && it.querySelector('link').textContent) || (it.querySelector('guid') && it.querySelector('guid').textContent) || '',
+        pubDate: (it.querySelector('pubDate') && it.querySelector('pubDate').textContent) || '',
+        source: feed.name
+      };
     });
-    return rows;
+    return items;
   }catch(e){
-    console.error("Failed to fetch sheet:", e);
-    return DEMO_DATA;
+    console.warn('feed failed', feed.url, e);
+    return [];
   }
 }
 
-// Render functions
-function toCards(items){
-  const wrapper = document.getElementById('cards');
-  wrapper.innerHTML = '';
-  const list = items.slice(0, MAX_TODAY_ITEMS);
-  list.forEach((it, idx) => {
+function matchesKeywords(text){
+  if(!text) return false;
+  const t = text.toLowerCase();
+  return KEYWORDS.some(k => t.includes(k));
+}
+
+// load saved embeds from localStorage
+function loadEmbeds(){ try { return JSON.parse(localStorage.getItem('lc_embeds')||'{}'); } catch(e){ return {}; } }
+function saveEmbedForKey(key, url){
+  const map = loadEmbeds(); map[key] = url; localStorage.setItem('lc_embeds', JSON.stringify(map));
+}
+function getEmbedForKey(key){
+  const map = loadEmbeds(); return map[key] || null;
+}
+
+async function buildPage(){
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  const all = [];
+  // fetch each feed
+  for(const f of FEEDS){
+    const items = await fetchFeed(f);
+    items.forEach(it => { it.source = f.name; all.push(it); });
+  }
+  // sort by pubDate desc
+  all.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
+  // filter by keywords
+  const filtered = all.filter(it => matchesKeywords(it.title + ' ' + it.description));
+  // dedupe by title
+  const seen = new Set(); const unique = [];
+  for(const it of filtered){
+    if(seen.has(it.title)) continue;
+    seen.add(it.title); unique.push(it);
+  }
+  const today = unique.slice(0, MAX_ITEMS);
+  if(today.length === 0){
+    content.innerHTML = '<div class="small" style="text-align:center;color:var(--muted)">No matching headlines found right now. Try again later.</div>';
+    document.getElementById('endNote').style.display = 'none';
+    return;
+  }
+  // render cards
+  today.forEach((it, idx) => {
     const card = el('article','card');
-    const videoWrap = el('div','video-area');
-    // Use iframe for YouTube embeds, video tag for mp4
-    if(it.VideoLink && it.VideoLink.includes('youtube.com/embed')){
-      const iframe = el('iframe');
-      iframe.src = it.VideoLink + "&controls=0&rel=0&modestbranding=1";
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      videoWrap.appendChild(iframe);
-    } else if(it.VideoLink && (it.VideoLink.endsWith('.mp4') || it.VideoLink.includes('cloudflare'))){
-      const video = el('video');
-      video.src = it.VideoLink;
-      video.setAttribute('playsinline','');
-      video.muted = true;
-      video.autoplay = false;
-      video.controls = true;
-      videoWrap.appendChild(video);
+    // media area
+    const media = el('div','media');
+    const key = btoa(it.title).slice(0,12); // short key for local embed mapping
+    const embed = getEmbedForKey(key);
+    if(embed){
+      const iframe = el('iframe'); iframe.src = embed + (embed.includes('?') ? '&' : '?') + "rel=0&modestbranding=1"; iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; media.appendChild(iframe);
     } else {
-      // Placeholder if no valid video link
-      const ph = el('div');
-      ph.style.padding = '20px'; ph.style.color='#999';
-      ph.textContent = 'Video preview';
-      videoWrap.appendChild(ph);
+      // placeholder with two buttons
+      const ph = el('div'); ph.style.padding='14px'; ph.style.color='#999'; ph.style.display='flex'; ph.style.flexDirection='column'; ph.style.alignItems='center'; ph.style.justifyContent='center';
+      ph.innerHTML = '<div style="font-weight:700;margin-bottom:6px">No video attached</div><div style="color:var(--muted);font-size:13px">Tap "Find Video" to search on YouTube or add your own embed</div>';
+      media.appendChild(ph);
     }
-    card.appendChild(videoWrap);
+    card.appendChild(media);
 
-    const meta = el('div','video-meta');
-    const h = el('h2'); h.textContent = it.Headline || 'Untitled';
-    meta.appendChild(h);
+    const meta = el('div','meta');
+    const h = el('h2'); h.textContent = it.title || 'Untitled'; meta.appendChild(h);
 
-    const s = el('p','summary'); s.textContent = it.Summary || '';
-    meta.appendChild(s);
+    const summ = el('p','summary'); summ.textContent = trimText(it.description || it.title || '', 420); meta.appendChild(summ);
 
-    // tags
-    const tagsWrap = el('div','tags');
-    if(it.Tags){
-      it.Tags.split(',').slice(0,3).forEach(t => {
-        const tg = el('div','tag'); tg.textContent = t.trim();
-        tagsWrap.appendChild(tg);
-      });
-    }
-    meta.appendChild(tagsWrap);
+    const tags = el('div','tags'); const t1 = el('div','tag'); t1.textContent = it.source; tags.appendChild(t1);
+    // add matched keywords as tags
+    KEYWORDS.forEach(k => { if((it.title+ ' ' + it.description).toLowerCase().includes(k)) { const tk = el('div','tag'); tk.textContent = k; tags.appendChild(tk); }});
+    meta.appendChild(tags);
 
-    // actions
     const actions = el('div','actions');
-    const readBtn = el('button','btn'); readBtn.textContent = 'Read Full Article';
-    readBtn.onclick = ()=> openModal(it);
-    const saveBtn = el('button','link-btn'); saveBtn.textContent = 'Save';
-    saveBtn.onclick = ()=> {
-      // store id-based? simple save by headline
-      const key = 'lc_watch';
-      const arr = JSON.parse(localStorage.getItem(key) || '[]');
-      if(!arr.includes(it.Headline)) arr.push(it.Headline);
-      localStorage.setItem(key, JSON.stringify(arr));
-      alert('Saved');
+    const findBtn = el('button','btn'); findBtn.textContent = 'Find Video'; findBtn.onclick = ()=> {
+      const q = encodeURIComponent(it.title + ' news');
+      window.open('https://www.youtube.com/results?search_query=' + q, '_blank');
     };
-    actions.appendChild(readBtn);
-    actions.appendChild(saveBtn);
+    const addBtn = el('button','link'); addBtn.textContent = 'Add Video'; addBtn.onclick = ()=> openAddModal(key, it.title);
+    const fullBtn = el('button','link'); fullBtn.textContent = 'Open Source'; fullBtn.onclick = ()=> window.open(it.link || '#','_blank');
+    const readBtn = el('button','link'); readBtn.textContent = 'Read Full'; readBtn.onclick = ()=> openModal(it, key);
+    actions.appendChild(findBtn); actions.appendChild(addBtn); actions.appendChild(readBtn);
     meta.appendChild(actions);
 
     card.appendChild(meta);
-    wrapper.appendChild(card);
+    content.appendChild(card);
   });
 
-  // End note visible if number of items <= MAX_TODAY_ITEMS and list ended
-  const endNote = document.getElementById('endNote');
-  if(items.length <= MAX_TODAY_ITEMS){
-    endNote.style.display = 'block';
-  } else {
-    endNote.style.display = 'none';
-  }
+  document.getElementById('endNote').style.display = 'block';
 }
 
-function openModal(item){
-  const modalBack = document.getElementById('modalBack');
-  const modalVideo = document.getElementById('modalVideo');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalArticle = document.getElementById('modalArticle');
-  const modalTags = document.getElementById('modalTags');
-  modalVideo.innerHTML = '';
-  // Insert appropriate video element
-  if(item.VideoLink && item.VideoLink.includes('youtube.com/embed')){
-    const iframe = document.createElement('iframe');
-    iframe.style.width='100%'; iframe.style.height='220px';
-    iframe.src = item.VideoLink + "&autoplay=1&mute=0";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    iframe.setAttribute('allowfullscreen','');
-    modalVideo.appendChild(iframe);
-  } else if(item.VideoLink && item.VideoLink.endsWith('.mp4')){
-    const video = document.createElement('video');
-    video.src = item.VideoLink; video.controls = true; video.autoplay = false;
-    video.style.width='100%'; modalVideo.appendChild(video);
+/* Modal controls */
+function openModal(item, key){
+  const bg = document.getElementById('modalBg'); const mv = document.getElementById('modalVideo'); mv.innerHTML='';
+  const embed = getEmbedForKey(key);
+  if(embed){
+    const iframe = document.createElement('iframe'); iframe.src = embed + "&autoplay=1"; iframe.allow="accelerometer; autoplay; encrypted-media; picture-in-picture"; iframe.style.width='100%'; iframe.style.height='260px'; mv.appendChild(iframe);
   }
-  modalTitle.textContent = item.Headline || '';
-  modalArticle.textContent = item.FullArticle || item.Summary || '';
-  modalTags.innerHTML = '';
-  if(item.Tags){
-    item.Tags.split(',').forEach(t=>{
-      const tg = document.createElement('div'); tg.className='tag'; tg.style.marginRight='6px';
-      tg.textContent = t.trim(); modalTags.appendChild(tg);
-    });
-  }
-  modalBack.style.display = 'flex';
-  document.getElementById('homeBtn').style.display = 'inline-block';
+  document.getElementById('modalTitle').textContent = item.title;
+  document.getElementById('modalFull').textContent = (item.description || '').replace(/<[^>]*>/g,'') + '\n\nSource: ' + (item.link||'');
+  const src = document.getElementById('modalSource'); src.href = item.link || '#'; src.textContent = 'Open original on ' + item.source;
+  bg.style.display = 'flex'; bg.setAttribute('aria-hidden','false');
+}
+document.getElementById('closeModal').onclick = ()=> { document.getElementById('modalBg').style.display = 'none'; document.getElementById('modalBg').setAttribute('aria-hidden','true'); const iframes = document.querySelectorAll('#modalVideo iframe'); iframes.forEach(f=>f.src=''); };
+
+/* Add embed modal */
+let currentAddKey = null;
+function openAddModal(key, title){
+  currentAddKey = key;
+  document.getElementById('embedUrl').value = getEmbedForKey(key) || '';
+  document.getElementById('embedNotice').textContent = 'Editing: ' + (title||'');
+  document.getElementById('videoAddBg').style.display = 'flex';
+  document.getElementById('videoAddBg').setAttribute('aria-hidden','false');
+}
+document.getElementById('closeAdd').onclick = ()=> { document.getElementById('videoAddBg').style.display = 'none'; document.getElementById('videoAddBg').setAttribute('aria-hidden','true'); };
+document.getElementById('openSearch').onclick = ()=> { if(currentAddKey) { window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(document.getElementById('embedNotice').textContent || ''), '_blank'); } };
+document.getElementById('saveEmbed').onclick = ()=> {
+  const v = document.getElementById('embedUrl').value.trim();
+  if(!v || !v.includes('youtube.com/embed')) { alert('Please paste a valid YouTube embed URL (https://www.youtube.com/embed/VIDEO_ID)'); return; }
+  if(!currentAddKey) return;
+  saveEmbedForKey(currentAddKey, v);
+  document.getElementById('embedNotice').textContent = 'Saved locally.';
+  // rebuild page to show embed
+  buildPage();
+  setTimeout(()=>{ document.getElementById('videoAddBg').style.display='none'; }, 700);
 }
 
-function closeModal(){
-  document.getElementById('modalBack').style.display = 'none';
-  document.getElementById('homeBtn').style.display = 'none';
-  // stop iframe playback by removing src
-  const iframes = document.querySelectorAll('#modalVideo iframe');
-  iframes.forEach(f=>f.src='');
-}
-
-document.getElementById('closeModal').addEventListener('click', closeModal);
-document.getElementById('modalBack').addEventListener('click', (e)=>{
-  if(e.target.id === 'modalBack') closeModal();
-});
-document.getElementById('homeBtn').addEventListener('click', closeModal);
-
-// Init
-(async function init(){
-  const data = await fetchSheetData();
-  // Optional: filter only today's entries if you have a date column.
-  // For now we assume sheet contains today's items only or the set you want to publish.
-  toCards(data);
-})();
+/* Init */
+buildPage();
 
 </script>
 </body>
