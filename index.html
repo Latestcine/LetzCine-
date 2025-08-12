@@ -1,112 +1,300 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Video News — Mobile Preview</title>
-  <style>
-    :root{
-      --bg:#0b0e11; --card:#0f1720; --muted:#9aa4af; --accent:#0ea5a4;
-      --white:#f8fafc;
-    }
-    html,body{height:100%; margin:0; background:var(--bg); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    .screen{max-width:420px; margin:20px auto; border-radius:18px; overflow:hidden; background:linear-gradient(180deg,#071019 0%, #0a1318 100%); box-shadow:0 20px 40px rgba(2,6,23,.6);}
-    .video-wrap{position:relative; background:#000; height:68vh; min-height:420px; display:flex; align-items:center; justify-content:center;}
-    .video-wrap iframe, .video-wrap video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0;}
-    .overlay-play{position:absolute; left:16px; top:16px; background:rgba(0,0,0,.45); color:var(--white); padding:6px 10px; border-radius:999px; font-size:13px}
-    .content{padding:16px; color:var(--white); background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.15) 100%);}
-    h1{margin:0; font-size:20px; line-height:1.2; letter-spacing:-0.2px;}
-    p.summary{margin:8px 0 12px; color:var(--muted); font-size:14px; line-height:1.45; max-height:4.5em; overflow:hidden;}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;}
-    .tag{background:rgba(255,255,255,.04); padding:6px 10px; border-radius:999px; color:var(--muted); font-size:13px; border:1px solid rgba(255,255,255,.03);}
-    .controls{display:flex; gap:10px; align-items:center; justify-content:space-between;}
-    .btn{background:var(--card); border:0; color:var(--white); padding:10px 12px; border-radius:10px; font-weight:600;}
-    .small{background:transparent; color:var(--muted); font-size:13px; padding:8px;}
-    footer.hint{font-size:12px; color:var(--muted); text-align:center; padding:12px;}
-    @media (max-width:420px){ .screen{margin:8px; border-radius:14px;} h1{font-size:18px;} .video-wrap{min-height:380px;} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LetzCine Frontline — Daily Video Brief</title>
+<meta name="description" content="LetzCine Frontline — mobile video-first geopolitics & defence news. Short video briefs with short articles." />
+<style>
+  :root{
+    --bg:#0b0b0c; --card:#0f1112; --muted:#9aa4af; --accent:#e50914; --white:#f6f7f8;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%; margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--white);}
+  .container{max-width:480px;margin:0 auto;padding-bottom:40px;}
+  header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.2));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+  .topbar{display:flex;align-items:center;gap:12px;padding:12px 14px;justify-content:center}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo .mark{width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,#e50914,#ff2d2d);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+  .logo .text{font-weight:700;letter-spacing:0.2px}
+  main{padding:12px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; overflow:hidden;margin-bottom:16px;border:1px solid rgba(255,255,255,0.03)}
+  .video-area{position:relative;background:#000;height:64vh;min-height:320px;display:flex;align-items:center;justify-content:center}
+  .video-area iframe, .video-area video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+  .video-meta{padding:12px}
+  h2{margin:0 0 8px 0;font-size:18px;line-height:1.18}
+  p.summary{margin:0 0 10px 0;color:var(--muted);font-size:14px;max-height:9em;overflow:hidden}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .tag{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+  .actions{display:flex;gap:8px;align-items:center}
+  .btn{background:var(--accent);color:white;border:0;padding:9px 12px;border-radius:10px;font-weight:600;box-shadow:0 6px 18px rgba(229,9,20,0.12)}
+  .link-btn{background:transparent;color:var(--muted);border:0;padding:8px;font-size:14px}
+  .end-note{text-align:center;color:var(--muted);padding:18px;font-size:14px}
+  .home-btn{position:fixed;right:12px;bottom:14px;background:var(--accent);border-radius:999px;padding:12px;color:white;border:0;box-shadow:0 10px 30px rgba(229,9,20,0.14)}
+  /* Modal */
+  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
+  .modal{max-width:760px;width:100%;max-height:92vh;overflow:auto;background:linear-gradient(180deg,#0c0c0c,#0b0b0b);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.04)}
+  .modal .title{font-size:20px;margin:6px 0 12px 0}
+  .modal .full-article{color:var(--muted);line-height:1.6;font-size:15px;margin-bottom:12px;white-space:pre-wrap}
+  .modal .close{background:transparent;border:0;color:var(--muted);font-weight:700;float:right}
+  /* responsive */
+  @media(min-width:560px){ .container{margin-top:20px} .video-area{height:58vh} }
+</style>
 </head>
 <body>
-  <div class="screen" role="region" aria-label="Video news preview">
-    <div class="video-wrap">
-      <!-- Replace src with your YouTube embed or hosted mp4 -->
-      <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4?rel=0&controls=0&autoplay=0&mute=1"
-              title="Sample video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-      <div class="overlay-play">LIVE • 00:57</div>
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <div class="logo" aria-hidden="false">
+          <div class="mark">LC</div>
+          <div class="text">LetzCine <span style="color:var(--accent)">Frontline</span></div>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="content">
-      <h1 id="headline">India Conducts Major Naval Drill in Indo-Pacific</h1>
-      <p class="summary" id="summary">
-        The Indian Navy launched a large-scale exercise involving 40+ ships and allied forces in the Indo-Pacific region.
-        Quick overview of objectives, participating nations, and strategic importance — 60 seconds.
-      </p>
+  <main class="container" id="main">
+    <!-- Cards will be injected here -->
+    <div id="cards"></div>
 
-      <div class="tags" aria-hidden="true">
-        <div class="tag">Geopolitics</div>
-        <div class="tag">Defence</div>
-        <div class="tag">Trending</div>
+    <!-- End note (when list ends) -->
+    <div id="endNote" class="end-note" style="display:none">
+      — End of Today's Headlines —<br/>
+      Want more? Visit full coverage pages below.
+    </div>
+  </main>
+
+  <!-- Floating Home (visible when modal open) -->
+  <button id="homeBtn" class="home-btn" title="Home" style="display:none">Home</button>
+
+  <!-- Modal for full article -->
+  <div id="modalBack" class="modal-back" role="dialog" aria-modal="true">
+    <div class="modal" id="modal">
+      <button class="close" id="closeModal">✕</button>
+      <div id="modalVideo" style="margin-top:6px;margin-bottom:12px"></div>
+      <div class="title" id="modalTitle"></div>
+      <div class="full-article" id="modalArticle"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="tag" id="modalTags"></div>
       </div>
-
-      <div class="controls">
-        <button class="small" onclick="prev()">◀ Prev</button>
-        <div style="flex:1"></div>
-        <button class="btn" onclick="save()">Watch Later</button>
-        <button class="small" onclick="share()">Share</button>
-      </div>
-
-      <div style="height:10px"></div>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="small" onclick="openSheet()">Edit (Google Sheet)</button>
-        <div style="flex:1"></div>
-        <span style="color:var(--muted); font-size:13px">Updated: <strong id="date">Today</strong></span>
-      </div>
-
-      <footer class="hint">Tap video to pause/play • Text is short for quick reading</footer>
     </div>
   </div>
 
-  <script>
-    // Demo: simulate prev/next and simple actions (no backend).
-    const items = [
-      {
-        video: "https://www.youtube.com/embed/ScMzIvxBSi4?rel=0&controls=0&mute=1",
-        title: "India Conducts Major Naval Drill in Indo-Pacific",
-        summary: "The Indian Navy launched a large-scale exercise involving 40+ ships and allied forces in the Indo-Pacific region. Quick overview in 60 seconds.",
-        tags: ["Geopolitics","Defence"]
-      },
-      {
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&controls=0&mute=1",
-        title: "Global Headline Roundup — Top Stories",
-        summary: "A 45-second roundup of the top international headlines you need to know today.",
-        tags: ["Trending","Politics"]
-      }
-    ];
-    let idx=0;
-    function render(i){
-      const it = items[i];
-      document.querySelector('.video-wrap iframe').src = it.video;
-      document.getElementById('headline').textContent = it.title;
-      document.getElementById('summary').textContent = it.summary;
-      document.getElementById('date').textContent = new Date().toLocaleDateString();
-      // update tags UI (simple)
-      const tagWrap = document.querySelector('.tags');
-      tagWrap.innerHTML = it.tags.map(t => `<div class="tag">${t}</div>`).join('');
-    }
-    function prev(){ idx = (idx - 1 + items.length) % items.length; render(idx); }
-    function next(){ idx = (idx + 1) % items.length; render(idx); }
-    function save(){ alert('Saved to Watch Later (demo)'); }
-    function share(){ alert('Share dialog (demo)'); }
-    function openSheet(){ alert('Open your Google Sheet on mobile to edit entries (demo).'); }
-    // tap video to pause/play
-    document.querySelector('.video-wrap').addEventListener('click', () => {
-      const iframe = document.querySelector('.video-wrap iframe');
-      // toggling play/pause for iframe isn't trivial — just show a hint for preview
-      alert('In live site the tap would pause/play. This is a static preview.');
+<script>
+/*
+HOW TO USE (quick):
+1) Create a Google Sheet with columns (first row headers):
+   VideoLink | Headline | Summary | Tags | FullArticle
+   - VideoLink: use YouTube embed format https://www.youtube.com/embed/VIDEO_ID or direct mp4 url
+   - Summary: short 5-7 lines (mobile-friendly)
+   - Tags: comma-separated like Geopolitics,Defence
+   - FullArticle: longer text for the detailed page
+
+2) Publish sheet to web:
+   File -> Publish to web -> choose the sheet -> Publish
+   Then use the "gviz" JSON endpoint URL:
+     https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/gviz/tq?tqx=out:json
+   Replace YOUR_SHEET_ID in the code below.
+
+3) If you DON'T want to expose the sheet publicly, use:
+   - Option A: Create a small Google Apps Script webapp (doGet) that returns JSON and deploy as "Anyone, even anonymous" (still public) OR
+   - Option B (recommended for privacy): host the JSON on your server or use a simple serverless function (Netlify/Vercel) as a proxy that fetches the sheet behind the scenes.
+
+For now this page uses client-side fetch with gviz JSON OR a local demo dataset (so it works out of box).
+*/
+
+// ====== CONFIG ======
+const SHEET_GVIZ_URL = ""; // <-- paste your gviz url here if you have published your sheet
+const MAX_TODAY_ITEMS = 6;   // number of items to show on homepage (no endless scroll)
+// =====================
+
+// Demo fallback dataset (works immediately)
+// Replace by your Google Sheet to go live.
+const DEMO_DATA = [
+  {
+    VideoLink: "https://www.youtube.com/embed/ScMzIvxBSi4?rel=0&controls=0&mute=1",
+    Headline: "India Conducts Major Naval Drill in Indo-Pacific",
+    Summary: "The Indian Navy launched its largest exercise in the Indo-Pacific with over 40 warships and allied units. Quick 60-second brief focusing on objectives and participating nations.",
+    Tags: "Geopolitics,Defence",
+    FullArticle: "Full article: The Indian Navy has increased presence with coordinated exercises across multiple fleets, focusing on maritime security, interoperability and readiness. The exercise involved carrier groups, submarines, and logistic support. Strategic implications include an increased deterrence posture and improved regional coordination."
+  },
+  {
+    VideoLink: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&controls=0&mute=1",
+    Headline: "Global Headline Roundup — Top Stories",
+    Summary: "A concise 45-second roundup of the top international stories including diplomatic talks, trade updates and a quick geopolitics snapshot.",
+    Tags: "Trending,Politics",
+    FullArticle: "Full article: Today's roundup covers the latest in diplomatic negotiations, economic measures affecting global trade, and a summary of breaking developments. Analysis covers potential outcomes and near-term impact."
+  }
+];
+
+// Utilities
+function el(tag, cls){const e=document.createElement(tag); if(cls) e.className=cls; return e;}
+function parseGvizJson(text){
+  // gviz returns: /*O_o*/\ngoogle.visualization.Query.setResponse({...})
+  const json = text.replace(/^[^{]*/, '').replace(/;?$/, '');
+  try{
+    return JSON.parse(json);
+  }catch(err){
+    console.warn('GViz parse failed', err);
+    return null;
+  }
+}
+
+async function fetchSheetData(){
+  if(!SHEET_GVIZ_URL) return DEMO_DATA;
+  try{
+    const res = await fetch(SHEET_GVIZ_URL);
+    const txt = await res.text();
+    const parsed = parseGvizJson(txt);
+    if(!parsed) return DEMO_DATA;
+    const cols = parsed.table.cols.map(c => c.label || c.id);
+    const rows = parsed.table.rows.map(r => {
+      const obj = {};
+      r.c.forEach((cell,i)=>{
+        obj[cols[i]] = cell ? cell.v : "";
+      });
+      return obj;
     });
-    // initial
-    render(0);
-  </script>
+    return rows;
+  }catch(e){
+    console.error("Failed to fetch sheet:", e);
+    return DEMO_DATA;
+  }
+}
+
+// Render functions
+function toCards(items){
+  const wrapper = document.getElementById('cards');
+  wrapper.innerHTML = '';
+  const list = items.slice(0, MAX_TODAY_ITEMS);
+  list.forEach((it, idx) => {
+    const card = el('article','card');
+    const videoWrap = el('div','video-area');
+    // Use iframe for YouTube embeds, video tag for mp4
+    if(it.VideoLink && it.VideoLink.includes('youtube.com/embed')){
+      const iframe = el('iframe');
+      iframe.src = it.VideoLink + "&controls=0&rel=0&modestbranding=1";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      videoWrap.appendChild(iframe);
+    } else if(it.VideoLink && (it.VideoLink.endsWith('.mp4') || it.VideoLink.includes('cloudflare'))){
+      const video = el('video');
+      video.src = it.VideoLink;
+      video.setAttribute('playsinline','');
+      video.muted = true;
+      video.autoplay = false;
+      video.controls = true;
+      videoWrap.appendChild(video);
+    } else {
+      // Placeholder if no valid video link
+      const ph = el('div');
+      ph.style.padding = '20px'; ph.style.color='#999';
+      ph.textContent = 'Video preview';
+      videoWrap.appendChild(ph);
+    }
+    card.appendChild(videoWrap);
+
+    const meta = el('div','video-meta');
+    const h = el('h2'); h.textContent = it.Headline || 'Untitled';
+    meta.appendChild(h);
+
+    const s = el('p','summary'); s.textContent = it.Summary || '';
+    meta.appendChild(s);
+
+    // tags
+    const tagsWrap = el('div','tags');
+    if(it.Tags){
+      it.Tags.split(',').slice(0,3).forEach(t => {
+        const tg = el('div','tag'); tg.textContent = t.trim();
+        tagsWrap.appendChild(tg);
+      });
+    }
+    meta.appendChild(tagsWrap);
+
+    // actions
+    const actions = el('div','actions');
+    const readBtn = el('button','btn'); readBtn.textContent = 'Read Full Article';
+    readBtn.onclick = ()=> openModal(it);
+    const saveBtn = el('button','link-btn'); saveBtn.textContent = 'Save';
+    saveBtn.onclick = ()=> {
+      // store id-based? simple save by headline
+      const key = 'lc_watch';
+      const arr = JSON.parse(localStorage.getItem(key) || '[]');
+      if(!arr.includes(it.Headline)) arr.push(it.Headline);
+      localStorage.setItem(key, JSON.stringify(arr));
+      alert('Saved');
+    };
+    actions.appendChild(readBtn);
+    actions.appendChild(saveBtn);
+    meta.appendChild(actions);
+
+    card.appendChild(meta);
+    wrapper.appendChild(card);
+  });
+
+  // End note visible if number of items <= MAX_TODAY_ITEMS and list ended
+  const endNote = document.getElementById('endNote');
+  if(items.length <= MAX_TODAY_ITEMS){
+    endNote.style.display = 'block';
+  } else {
+    endNote.style.display = 'none';
+  }
+}
+
+function openModal(item){
+  const modalBack = document.getElementById('modalBack');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalArticle = document.getElementById('modalArticle');
+  const modalTags = document.getElementById('modalTags');
+  modalVideo.innerHTML = '';
+  // Insert appropriate video element
+  if(item.VideoLink && item.VideoLink.includes('youtube.com/embed')){
+    const iframe = document.createElement('iframe');
+    iframe.style.width='100%'; iframe.style.height='220px';
+    iframe.src = item.VideoLink + "&autoplay=1&mute=0";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.setAttribute('allowfullscreen','');
+    modalVideo.appendChild(iframe);
+  } else if(item.VideoLink && item.VideoLink.endsWith('.mp4')){
+    const video = document.createElement('video');
+    video.src = item.VideoLink; video.controls = true; video.autoplay = false;
+    video.style.width='100%'; modalVideo.appendChild(video);
+  }
+  modalTitle.textContent = item.Headline || '';
+  modalArticle.textContent = item.FullArticle || item.Summary || '';
+  modalTags.innerHTML = '';
+  if(item.Tags){
+    item.Tags.split(',').forEach(t=>{
+      const tg = document.createElement('div'); tg.className='tag'; tg.style.marginRight='6px';
+      tg.textContent = t.trim(); modalTags.appendChild(tg);
+    });
+  }
+  modalBack.style.display = 'flex';
+  document.getElementById('homeBtn').style.display = 'inline-block';
+}
+
+function closeModal(){
+  document.getElementById('modalBack').style.display = 'none';
+  document.getElementById('homeBtn').style.display = 'none';
+  // stop iframe playback by removing src
+  const iframes = document.querySelectorAll('#modalVideo iframe');
+  iframes.forEach(f=>f.src='');
+}
+
+document.getElementById('closeModal').addEventListener('click', closeModal);
+document.getElementById('modalBack').addEventListener('click', (e)=>{
+  if(e.target.id === 'modalBack') closeModal();
+});
+document.getElementById('homeBtn').addEventListener('click', closeModal);
+
+// Init
+(async function init(){
+  const data = await fetchSheetData();
+  // Optional: filter only today's entries if you have a date column.
+  // For now we assume sheet contains today's items only or the set you want to publish.
+  toCards(data);
+})();
+
+</script>
 </body>
 </html>
